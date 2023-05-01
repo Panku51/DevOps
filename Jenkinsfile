@@ -26,18 +26,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                bat 'docker build -t myapp .'
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                bat 'docker-compose up -d'
-            }
-        }
-
         stage('Start Prometheus') {
             steps {
                 bat 'docker run -d -p 9092:9092 --name prometheus prom/prometheus'
@@ -58,6 +46,17 @@ pipeline {
                 bat "curl -X POST -H \"Content-Type: application/json\" \
                     -d '{\"dashboard\":{\"id\":null,\"title\":\"${JOB_NAME}-${BUILD_NUMBER}\",\"tags\":[\"devops\"],\"timezone\":\"browser\",\"schemaVersion\":21,\"panels\":[{\"id\":1,\"gridPos\":{\"x\":0,\"y\":0,\"w\":12,\"h\":8},\"type\":\"graph\",\"title\":\"Panel Title\",\"datasource\":\"db\",\"targets\":[{\"expr\":\"up\",\"legendFormat\":\"\",\"refId\":\"A\"}],\"xaxis\":{\"mode\":\"time\",\"show\":true},\"yaxes\":[{\"format\":\"short\",\"show\":true},{\"format\":\"short\",\"show\":true}]},{\"collapsed\":false,\"gridPos\":{\"h\":2,\"w\":24,\"x\":0,\"y\":8},\"id\":2,\"panels\":[],\"title\":\"\",\"type\":\"row\"}],\"version\":0,\"links\":[]},\"overwrite\":false}' \
                     http://admin:${API_KEY}@192.168.64.1:3000/api/dashboards/db"
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'docker-compose build'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                bat 'docker-compose up -d'
             }
         }
     }
