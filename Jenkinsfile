@@ -22,7 +22,7 @@ pipeline {
                 API_KEY = 'eyJrIjoiTXB5Z01md0Y2dWtrNEhlUE1jMmQ2N2JXV0RTQ1NVZjMiLCJuIjoibWFuYXMiLCJpZCI6MX0='
             }
             steps {
-                bat 'docker run -d -p 3000:3131 --name grafana grafana/grafana'
+                bat 'docker run -d -p 3131:3001 --name grafana grafana/grafana'
 //                 bat 'timeout /t 10 /nobreak'
                 bat "curl -X POST -H \"Content-Type: application/json\" \
                     -d '{\"name\":\"db\",\"type\":\"prometheus\",\"url\":\"http://172.24.64.1:9090\",\"access\":\"proxy\",\"isDefault\":true}' \
