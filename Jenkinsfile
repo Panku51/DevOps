@@ -28,13 +28,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t myapp .'
+                bat 'docker build -t myapp .'
             }
         }
         
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
 
