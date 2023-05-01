@@ -5,6 +5,10 @@ pipeline {
         
         JAVA_HOME = 'C:/Program Files/Java/jdk-17'
     }
+    tools {
+         maven "Maven 3.8.6"
+         //maven
+   }
 
     stages {
 
