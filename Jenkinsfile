@@ -7,6 +7,20 @@ pipeline {
     }
 
     stages {
+
+        stage('Test Maven JUnit') {
+         steps {
+           sh "mvn test"
+         }
+         post{
+           always{
+              junit (
+                    allowEmptyResults:true,
+                    testResults:'*test-reports/.xml'
+                    )
+            }
+         }
+      }
         
         stage('SonarQube Analysis') {
             environment {
@@ -23,6 +37,18 @@ pipeline {
                              -Dsonar.login=sqp_dbcae01bc367f4cf275d16121f25602abfa4d34d'
                     }
                 }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'docker build -t myapp .'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
             }
         }
 
