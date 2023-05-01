@@ -11,9 +11,9 @@ services:
       - DB_HOST=mysql
       - DB_USER=root
       - DB_PASS=bMdX3B4GWTfzKTfm
-      - DB_PORT=7000
+      - DB_PORT=8181
       - DB_NAME=aquarius
-    command: ["bash", "./wait-for-it.sh", "mysql:7000", "--timeout=60", "--", "./app/database/migrations/migrate.sh"]
+    command: ["bash", "./wait-for-it.sh", "mysql:8181", "--timeout=60", "--", "./app/database/migrations/migrate.sh"]
     networks:
       - internal_network
 
@@ -24,7 +24,7 @@ services:
       - DB_HOST=mysql
       - DB_USER=root
       - DB_PASS=bMdX3B4GWTfzKTfm
-      - DB_PORT=7000
+      - DB_PORT=8181
       - DB_NAME=aquarius
       - DB_CONNECTION_LIMIT=10
       - JWT_SECRET_KEY=xA0VkgSdrdSBKCSdhZuilI4DhvhTSQPs1Qyt7jODFmmrtQKNeerYgKwAQMCPegJHmOofdHFVVFuzwLQZxHgOKAluSCYZOcZjMYEYgWTPM0IuCtZA80bC8tsf+CXNmExWEtxHOvNkarvm5YjQlwwLa+IcMqWwiYrvdiOLFPXy4CBGInwfwZzI3ie6kift9yuXj2U9j6dZB/+bofGvwxeH1bVPlX9vkIQhE2nOmUDGEi/6ivqRZ1xn+uYpprr9YAZAwrGOZB0yg+k4m8vPLWfPWwHDbSmE/eWLK/HBVEbNHm4cGFRze3XnIMkpTizBoJXXfqoC10lwnzowDXN12ye0kg==
@@ -53,7 +53,7 @@ services:
     volumes:
       - './mysql/mysql_data:/var/lib/mysql'
     ports:
-      - "192.168.64.1:7000:7000"
+      - "192.168.64.1:8181:8181"
     networks:
       - internal_network
   
