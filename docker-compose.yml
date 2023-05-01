@@ -36,7 +36,7 @@ services:
       - '/api/node_modules'
       - './api:/api'
     ports:
-      - "3.108.195.70:5000:5000"
+      - "192.168.64.1:5000:5000"
     depends_on:
       - mysql
       - migration
@@ -53,7 +53,7 @@ services:
     volumes:
       - './mysql/mysql_data:/var/lib/mysql'
     ports:
-      - "3.108.195.70:7000:7000"
+      - "192.168.64.1:7000:7000"
     networks:
       - internal_network
   
@@ -61,7 +61,7 @@ services:
     container_name: aquarius-adminer-dev
     image: adminer:4.8.1-standalone
     ports:
-      - "3.108.195.70:8081:8081"
+      - "192.168.64.1:8081:8081"
     environment:
       - ADMINER_DEFAULT_SERVER=aquarius-mysql-dev
     depends_on:
@@ -81,7 +81,7 @@ services:
       - '/app/node_modules'
       - './frontend:/app'
     ports:
-      - "3.108.195.70:3000:3000"
+      - "192.168.64.1:3000:3000"
     depends_on:
       - api
     networks:
@@ -94,7 +94,7 @@ services:
       - aquarius-frontend
     build: ./nginx
     ports:
-      - "3.108.195.70:3050:80"
+      - "192.168.64.1:3050:80"
     networks:
       - external_network
       - internal_network
