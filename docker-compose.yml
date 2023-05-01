@@ -81,7 +81,7 @@ services:
       - '/app/node_modules'
       - './frontend:/app'
     ports:
-      - "192.168.64.1:3000:3000"
+      - "192.168.64.1:5151:5151"
     depends_on:
       - api
     networks:
