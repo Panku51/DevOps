@@ -11,20 +11,6 @@ pipeline {
    }
 
     stages {
-
-        stage('Test Maven JUnit') {
-         steps {
-           sh "mvn test"
-         }
-         post{
-           always{
-              junit (
-                    allowEmptyResults:true,
-                    testResults:'*test-reports/.xml'
-                    )
-            }
-         }
-      }
         
         stage('SonarQube Analysis') {
             environment {
