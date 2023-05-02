@@ -43,24 +43,6 @@ pipeline {
                 bat 'docker-compose up -d'
             }
         }
-
-         stage('SonarQube Analysis') {
-            environment {
-                SCANNER_HOME = tool 'SonarQube_Scanner'
-            }
-            steps {
-                script {
-                    def scannerHome = tool 'SonarQube_Scanner'
-                    withEnv(["PATH+SCANNER=${scannerHome}\\bin"]) {
-                        bat 'sonar-scanner.bat \
-                             -Dsonar.projectKey=manas \
-                             -Dsonar.sources=. \
-                             -Dsonar.host.url=http://192.168.234.1:9000 \
-                             -Dsonar.login=sqp_dbcae01bc367f4cf275d16121f25602abfa4d34d'
-                    }
-                }
-            }
-        }
     }
 
 
